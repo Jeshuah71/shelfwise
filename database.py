@@ -18,6 +18,16 @@ cursor.execute("""
     )
 """)
 
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS distributions (
+        id INTEGER PRIMARY KEY,
+        food_item_id INTEGER NOT NULL,
+        quantity INTEGER NOT NULL CHECK(quantity > 0),
+        distributed_at TEXT NOT NULL,
+        FOREIGN KEY (food_item_id) REFERENCES food_items(id)
+    )
+""")
+
 # 4. Save database changes
 connection.commit()
 
